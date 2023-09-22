@@ -1,0 +1,55 @@
+@import "bootstrap/scss/bootstrap";
+
+:root {
+  --width-sidebar: 230px;
+  --color-company: rgb(168, 47, 98);
+  --color-header: rgb(209, 98, 144);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  margin-left: var(--width-sidebar);
+  background-color: var(--color-header);
+}
+
+.dashboard-sidebar {
+  z-index: 1;
+  width: var(--width-sidebar);
+  --bs-bg-opacity: .8;
+  background-image: var(--bs-gradient) !important;
+  background-color: var(--bs-dark);
+
+  overflow: auto;
+}
+
+.dashboard-footer {
+  margin-left: var(--width-sidebar);
+}
+
+.nav-sidebar .nav-link {
+  color: white;
+}
+
+.nav-sidebar .active {
+  --bs-bg-opacity: .8;
+  background-image: var(--bs-gradient) !important;
+  background-color: rgba(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.dashboard-main-content {
+  margin-left: var(--width-sidebar);
+}
+
+.auth-main-content {
+  background-image: url("/fondo_login.webp");
+  background-size: 100% 100%;
+}
