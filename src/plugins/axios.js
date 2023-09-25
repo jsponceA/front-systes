@@ -12,7 +12,10 @@ const axiosPrivate = axios.create({
 
 axiosPrivate.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = `Bearer ${123}`;
+    const txtAuthStorage = window.localStorage.getItem("auth-storage");
+    const authStorage = JSON.parse(txtAuthStorage);
+
+    config.headers.Authorization = `Bearer ${authStorage.state?.token}`;
     return config;
   },
   (error) => {

@@ -7,19 +7,33 @@ import {
   mdiHistory,
   mdiStore,
   mdiChartBar,
+  mdiClose,
 } from "@mdi/js";
 import { NavLink } from "react-router-dom";
+import useAuthStore from "../../store/authStore";
+import useSidebar from "../../hooks/useSidebar";
 
 const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 const DashboardSidebar = () => {
+  const user = useAuthStore((state) => state.user);
+  const { toggleSideBar } = useSidebar();
+
   return (
     <div className=" position-fixed vh-100 dashboard-sidebar">
       <div
         className="fw-bold  d-flex flex-column w-100"
         style={{ backgroundColor: "var(--bs-pink)" }}
       >
-        <p className="my-1 text-white text-center ">🌍{APP_NAME}🌍</p>
+        <a
+          onClick={toggleSideBar}
+          href="#"
+          className="my-0 link-light ms-auto d-md-none d-block"
+        >
+          {" "}
+          <Icon path={mdiClose} size={1.2} />
+        </a>
+        <p className="my-0 text-white text-center ">🌍{APP_NAME}🌍</p>
         <div className="align-items-center d-flex flex-column">
           <img
             src="/foto_user.jpg"
@@ -31,7 +45,7 @@ const DashboardSidebar = () => {
             <Icon path={mdiCircle} size={0.5} color="green" />
             <span>En linea</span>
           </p>
-          <p className="my-0">Luis Tasayco</p>
+          <p className="my-0 text-capitalize">{user.nombre}</p>
         </div>
       </div>
       <ul className="nav nav-pills flex-column mb-auto nav-sidebar mt-3 ">
@@ -45,7 +59,10 @@ const DashboardSidebar = () => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link d-flex align-items-center">
+          <NavLink
+            to={"/panel/usuarios"}
+            className="nav-link d-flex align-items-center"
+          >
             <Icon
               path={mdiAccountGroup}
               size={0.8}
@@ -53,7 +70,7 @@ const DashboardSidebar = () => {
               color="silver"
             />{" "}
             Usuarios
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
           <a href="#" className="nav-link d-flex align-items-center">

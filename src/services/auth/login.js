@@ -1,7 +1,7 @@
-import { axiosPrivate } from "../../plugins/axios";
+import { axiosPublic } from "../../plugins/axios";
 
 const loginService = async (data) => {
-  const response = await axiosPrivate.post("auth/login", data);
+  const response = await axiosPublic.post("auth/login", data);
   return response;
 };
 

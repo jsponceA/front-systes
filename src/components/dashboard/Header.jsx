@@ -1,17 +1,22 @@
 import Icon from "@mdi/react";
 import { mdiMenu, mdiAccountEdit, mdiCogs, mdiLogout } from "@mdi/js";
-import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/authStore";
+import useLogout from "../../hooks/auth/useLogout";
+import useSidebar from "../../hooks/useSidebar";
 
 const DashboardHeader = () => {
-  const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
 
-  const handleClickLogout = (e) => {
-    e.preventDefault();
-    navigate("/login");
-  };
+  const { isLoadingLogout, handleClickLogout } = useLogout();
+  const { toggleSideBar } = useSidebar();
+
   return (
     <header className=" text-white dashboard-header py-2 px-1 d-flex">
-      <a href="#" className="text-decoration-none link-light">
+      <a
+        onClick={toggleSideBar}
+        href="#"
+        className="text-decoration-none link-light"
+      >
         <Icon path={mdiMenu} size={1.2} />
       </a>
       <p className="my-0 mx-auto fw-medium align-self-center">
@@ -47,7 +52,11 @@ const DashboardHeader = () => {
               <hr className="dropdown-divider" />
             </li>
             <li>
-              <a onClick={handleClickLogout} className="dropdown-item" href="#">
+              <a
+                onClick={handleClickLogout}
+                className={`dropdown-item ${isLoadingLogout ? "disabled" : ""}`}
+                href="#"
+              >
                 <Icon path={mdiLogout} size={1} /> Cerrar Sesión
               </a>
             </li>
