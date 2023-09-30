@@ -4,16 +4,16 @@ const todosLosUsuariosService = async (params) => {
   const response = await axiosPrivate.get("usuarios", { params });
   return response;
 };
-const crearUsuarioService = async (id) => {
-  const response = await axiosPrivate.get(`usuarios/${id}`);
-  return response;
-};
-const usuarioPorIdService = async (data) => {
+const crearUsuarioService = async (data) => {
   const response = await axiosPrivate.post("usuarios", data);
   return response;
 };
+const usuarioPorIdService = async (id) => {
+  const response = await axiosPrivate.get(`usuarios/${id}`);
+  return response;
+};
 const modificarUsuarioService = async (id, data) => {
-  const response = await axiosPrivate.put(`usuarios/${id}`, data);
+  const response = await axiosPrivate.post(`usuarios/${id}`, data);
   return response;
 };
 const eliminarUsuarioService = async (id) => {

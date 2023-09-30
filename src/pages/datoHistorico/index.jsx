@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import ReactPaginateBootstrap5 from "../../components/ReactPaginateBootstrap5";
-import useUsuarioIndex from "../../hooks/usuario/useUsuarioIndex";
+import useArchivoIndex from "../../hooks/archivo/useArchivoIndex";
 import Icon from "@mdi/react";
 import {
   mdiAccountGroup,
@@ -13,25 +13,26 @@ import {
   mdiPencil,
   mdiDelete,
   mdiViewList,
+  mdiHistory,
+  mdiDownload,
 } from "@mdi/js";
 import InputIcon from "../../components/InputIcon";
 import SelectIcon from "../../components/SelectIcon";
-import UsuarioEliminar from "./Eliminar";
 
-const UsuarioIndex = () => {
+const DatoHistoricoIndex = () => {
   const {
-    listadoUsuarios,
-    usuarios,
-    handleChangeFiltrosUsuario,
+    listadoArchivos,
+    archivos,
+    handleChangeFiltrosArchivo,
     infoPaginacionListado,
-    isLoadingUsuarios,
-    modalEliminarUsuario,
-    setModalEliminarUsuario,
-    idUsuarioProp,
+    isLoadingArchivos,
+    modalEliminarArchivo,
+    setModalEliminarArchivo,
+    idArchivoProp,
     handleKeyInputFiltros,
     handlePageClick,
     openModalEliminar,
-  } = useUsuarioIndex();
+  } = useArchivoIndex();
 
   return (
     <div className="container-fluid">
@@ -42,7 +43,7 @@ const UsuarioIndex = () => {
               <Link to={"/panel/inicio"}>Inicio</Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Usuarios
+              Datos Historicos
             </li>
           </ol>
         </div>
@@ -52,7 +53,7 @@ const UsuarioIndex = () => {
           <div className="card border-0 shadow-lg ">
             <div className="card-header bg-primary bg-gradient bg-opacity-75 text-white">
               <p className="my-0 text-center fw-bold fs-5">
-                <Icon path={mdiAccountGroup} size={1} /> USUARIOS
+                <Icon path={mdiHistory} size={1} /> DATOS HISTORICOS
               </p>
             </div>
             <div className="card-body">
@@ -72,17 +73,17 @@ const UsuarioIndex = () => {
                       <Icon path={mdiFileExcel} size={1} />
                     </button>
                   </div> */}
-                  <Link
-                    to={"../usuarios/crear"}
+                  {/*  <Link
+                    to={"../archivos/crear"}
                     className="btn bg-primary bg-gradient text-white d-flex align-items-center ms-auto"
                   >
                     <Icon path={mdiPlus} size={1} /> AGREGAR USUARIO
-                  </Link>
+                  </Link> */}
                 </div>
-                <div className="col-md-12">
+                {/* <div className="col-md-12">
                   <InputIcon
                     name="buscar"
-                    onChange={handleChangeFiltrosUsuario}
+                    onChange={handleChangeFiltrosArchivo}
                     onKeyDown={handleKeyInputFiltros}
                     icon={<Icon path={mdiTextSearch} size={1} />}
                     size="sm"
@@ -90,12 +91,12 @@ const UsuarioIndex = () => {
                     placeholder="Buscar registro..."
                     maxLength="255"
                   />
-                </div>
+                </div> */}
 
                 <div className="col-md-2 mb-1 ">
                   <SelectIcon
                     name="cantidadRegistros"
-                    onChange={handleChangeFiltrosUsuario}
+                    onChange={handleChangeFiltrosArchivo}
                     icon={<Icon path={mdiViewList} size={1} />}
                     size="sm"
                     options={
@@ -114,22 +115,16 @@ const UsuarioIndex = () => {
                     <table className="table table-sm table-hover table-bordered custom-table ">
                       <thead>
                         <tr className="text-nowrap">
-                          <td className="text-center">ACCIONES</td>
-                          <td>
-                            <p className="my-0 mx-4">FOTO</p>
-                          </td>
-                          <td>USUARIO</td>
-                          <td>APELLIDOS Y NOMBRES</td>
-                          <td>CORREO</td>
-                          <td>ESTADO</td>
-                          <td>FECHA CREACIÓN</td>
-                          <td>FECHA MODIFICACIÓN</td>
+                          {/* <td className="text-center">ACCIONES</td> */}
+                          <td>ARCHIVO</td>
+                          <td>REGISTRADO POR</td>
+                          <td>FECHA DE SUBIDA</td>
                         </tr>
                       </thead>
                       <tbody>
-                        {usuarios.map((usuario) => (
-                          <tr key={usuario.id}>
-                            <td>
+                        {archivos.map((archivo) => (
+                          <tr key={archivo.id}>
+                            {/* <td>
                               <div className="dropdown open ">
                                 <button
                                   className="btn bg-secondary bg-gradient text-white btn-sm dropdown-toggle "
@@ -142,70 +137,50 @@ const UsuarioIndex = () => {
                                   <Icon path={mdiCogs} size={0.8} /> Seleccione
                                 </button>
                                 <div className="dropdown-menu">
-                                  <Link
-                                    to={`../usuarios/editar/${usuario.id}`}
+                                    <Link
+                                    to={`../archivos/editar/${archivo.id}`}
                                     className="dropdown-item"
                                   >
                                     <Icon path={mdiPencil} size={0.8} /> Editar
-                                  </Link>
-                                  <button
+                                  </Link> 
+                                   <button
                                     onClick={() =>
-                                      openModalEliminar(usuario.id)
+                                      openModalEliminar(archivo.id)
                                     }
                                     type="button"
                                     className="dropdown-item"
                                   >
                                     <Icon path={mdiDelete} size={0.8} />{" "}
                                     Eliminar
-                                  </button>
+                                  </button> 
                                 </div>
                               </div>
-                            </td>
+                            </td> */}
                             <td>
-                              {usuario.foto_url && (
-                                <img
-                                  src={usuario.foto_url}
-                                  alt=""
-                                  className="img-thumbnail"
-                                  style={{ width: "120px", height: "80px" }}
-                                />
-                              )}
-                            </td>
-                            <td>{usuario.usuario}</td>
-                            <td className="text-capitalize">{`${usuario.apellidos}, ${usuario.nombres}`}</td>
-                            <td>{usuario.correo}</td>
-                            <td>
-                              <span
-                                className={`badge bg-${
-                                  usuario.estado ? "success" : "danger"
-                                }`}
+                              <a
+                                className="link-success text-decoration-none"
+                                href={archivo.excel_url}
+                                download
                               >
-                                {usuario.estado ? "Habilitado" : "Inhabilitado"}
-                              </span>
+                                <Icon path={mdiFileExcel} size={1} /> Descargar
+                                EXCEL
+                              </a>
                             </td>
+                            <td>{archivo.usuario.usuario}</td>
+
                             <td>
-                              {usuario.created_at &&
-                                dayjs(usuario.created_at).format("DD/MM/YYYY")}
-                            </td>
-                            <td>
-                              {usuario.updated_at &&
-                                dayjs(usuario.updated_at).format("DD/MM/YYYY")}
+                              {archivo.created_at &&
+                                dayjs(archivo.created_at).format("DD/MM/YYYY")}
                             </td>
                           </tr>
                         ))}
                       </tbody>
                       <tfoot>
                         <tr className="text-nowrap">
-                          <td className="text-center">ACCIONES</td>
-                          <td>
-                            <p className="my-0 mx-4">FOTO</p>
-                          </td>
-                          <td>USUARIO</td>
-                          <td>APELLIDOS Y NOMBRES</td>
-                          <td>CORREO</td>
-                          <td>ESTADO</td>
-                          <td>FECHA CREACIÓN</td>
-                          <td>FECHA MODIFICACIÓN</td>
+                          {/* <td className="text-center">ACCIONES</td> */}
+                          <td>ARCHIVO</td>
+                          <td>REGISTRADO POR</td>
+                          <td>FECHA DE SUBIDA</td>
                         </tr>
                       </tfoot>
                     </table>
@@ -233,14 +208,8 @@ const UsuarioIndex = () => {
           </div>
         </div>
       </div>
-      <UsuarioEliminar
-        openModal={modalEliminarUsuario}
-        setOpenModal={setModalEliminarUsuario}
-        id={idUsuarioProp}
-        listadoUsuarios={listadoUsuarios}
-      />
     </div>
   );
 };
 
-export default UsuarioIndex;
+export default DatoHistoricoIndex;

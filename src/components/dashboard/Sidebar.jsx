@@ -36,16 +36,16 @@ const DashboardSidebar = () => {
         <p className="my-0 text-white text-center ">🌍{APP_NAME}🌍</p>
         <div className="align-items-center d-flex flex-column">
           <img
-            src="/foto_user.jpg"
+            src={user.foto_url}
             alt=""
             className="rounded-circle"
             style={{ width: "100px", height: "100px" }}
           />
           <p className="my-0 d-flex align-items-center fw-medium">
             <Icon path={mdiCircle} size={0.5} color="green" />
-            <span>En linea</span>
+            <span className="text-white">En linea</span>
           </p>
-          <p className="my-0 text-capitalize">{user.nombre}</p>
+          <p className="my-0 text-capitalize text-white">{user.nombres}</p>
         </div>
       </div>
       <ul className="nav nav-pills flex-column mb-auto nav-sidebar mt-3 ">
@@ -73,13 +73,10 @@ const DashboardSidebar = () => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link d-flex align-items-center">
-            <Icon path={mdiStore} size={0.8} className="me-1" color="skyblue" />{" "}
-            Ventas Registradas
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="#" className="nav-link d-flex align-items-center">
+          <NavLink
+            to={"/panel/carga-excel"}
+            className="nav-link d-flex align-items-center"
+          >
             <Icon
               path={mdiFileExcel}
               size={0.8}
@@ -87,12 +84,11 @@ const DashboardSidebar = () => {
               className="me-1"
             />{" "}
             Cargar Excel Ventas
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
           <NavLink
             to={"/panel/graficos"}
-            href="#"
             className="nav-link d-flex align-items-center"
           >
             <Icon
@@ -101,14 +97,27 @@ const DashboardSidebar = () => {
               className="me-1"
               color="orange"
             />{" "}
-            Graficos
+            Graficos Generados
           </NavLink>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link d-flex align-items-center">
+          <NavLink
+            to={"/panel/ventas"}
+            className="nav-link d-flex align-items-center"
+          >
+            <Icon path={mdiStore} size={0.8} className="me-1" color="skyblue" />{" "}
+            Ventas Registradas
+          </NavLink>
+        </li>
+
+        <li className="nav-item">
+          <NavLink
+            to={"/panel/datos-historicos"}
+            className="nav-link d-flex align-items-center"
+          >
             <Icon path={mdiHistory} size={0.8} className="me-1" color="black" />{" "}
             Datos Historicos
-          </a>
+          </NavLink>
         </li>
       </ul>
     </div>

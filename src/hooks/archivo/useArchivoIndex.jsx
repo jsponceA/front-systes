@@ -1,34 +1,34 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { todosLosUsuariosService } from "../../services/usuario";
+import { todosLosArchivosService } from "../../services/archivo";
 import { useEffect } from "react";
-const useUsuarioIndex = () => {
-  const [usuarios, setUsuarios] = useState([]);
+const useArchivoIndex = () => {
+  const [archivos, setArchivos] = useState([]);
   const [infoPaginacionListado, setInfoPaginacionListado] = useState({});
   const [filtrosListado, setFiltrosListado] = useState({
     buscar: "",
     cantidadRegistros: 10,
     pagina: 1,
   });
-  const [isLoadingUsuarios, setIsLoadingUsuarios] = useState(false);
-  const [modalEliminarUsuario, setModalEliminarUsuario] = useState(false);
-  const [idUsuarioProp, setIdUsuarioProp] = useState(null);
+  const [isLoadingArchivos, setIsLoadingArchivos] = useState(false);
+  const [modalEliminarArchivo, setModalEliminarArchivo] = useState(false);
+  const [idArchivoProp, setIdArchivoProp] = useState(null);
 
-  const listadoUsuarios = async () => {
+  const listadoArchivos = async () => {
     try {
-      setIsLoadingUsuarios(true);
-      const response = await todosLosUsuariosService(filtrosListado);
-      setUsuarios(response.data.usuarios.data);
-      setInfoPaginacionListado(response.data.usuarios);
+      setIsLoadingArchivos(true);
+      const response = await todosLosArchivosService(filtrosListado);
+      setArchivos(response.data.archivos.data);
+      setInfoPaginacionListado(response.data.archivos);
     } catch (error) {
       console.log(error);
       toast.error("Error al obtener el listado de recursos");
     } finally {
-      setIsLoadingUsuarios(false);
+      setIsLoadingArchivos(false);
     }
   };
 
-  const handleChangeFiltrosUsuario = async (e) => {
+  const handleChangeFiltrosArchivo = async (e) => {
     const { type, name, value } = e.target;
     setFiltrosListado((prev) => ({
       ...prev,
@@ -37,13 +37,13 @@ const useUsuarioIndex = () => {
   };
 
   const openModalEliminar = (id) => {
-    setModalEliminarUsuario(true);
-    setIdUsuarioProp(id);
+    setModalEliminarArchivo(true);
+    setIdArchivoProp(id);
   };
 
   const handleKeyInputFiltros = async (e) => {
     if (e.key === "Enter") {
-      await listadoUsuarios();
+      await listadoArchivos();
     }
   };
 
@@ -53,22 +53,22 @@ const useUsuarioIndex = () => {
   };
 
   useEffect(() => {
-    listadoUsuarios();
+    listadoArchivos();
   }, [filtrosListado.pagina, filtrosListado.cantidadRegistros]);
 
   return {
-    listadoUsuarios,
-    usuarios,
-    handleChangeFiltrosUsuario,
+    listadoArchivos,
+    archivos,
+    handleChangeFiltrosArchivo,
     infoPaginacionListado,
-    isLoadingUsuarios,
-    modalEliminarUsuario,
-    setModalEliminarUsuario,
-    idUsuarioProp,
+    isLoadingArchivos,
+    modalEliminarArchivo,
+    setModalEliminarArchivo,
+    idArchivoProp,
     handleKeyInputFiltros,
     handlePageClick,
     openModalEliminar,
   };
 };
 
-export default useUsuarioIndex;
+export default useArchivoIndex;

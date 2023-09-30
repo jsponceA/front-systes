@@ -6,8 +6,12 @@
   --ml-sidebar: 230px;
   --color-company: rgb(168, 47, 98);
   --color-header: rgb(209, 98, 144);
-  --bs-primary: #0b1320;
+  --bs-primary: #a82f62;
   --bs-primary-rgb: 168, 47, 98;
+  --bs-link-color: #a82f62;
+  --bs-link-color-rgb: 168, 47, 98;
+  --bs-link-hover-color: #a82f62;
+  --bs-link-hover-color-rgb: 168, 47, 98;
 }
 
 
@@ -19,6 +23,11 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.pagination .active a {
+  background-color: var(--color-company);
+  border-color: var(--color-company);
 }
 
 .dashboard-header {
@@ -53,6 +62,7 @@ body {
 .dashboard-main-content {
   margin-left: var(--ml-sidebar);
   padding-top: 10px;
+  padding-bottom: 30px;
 }
 
 .auth-main-content {
@@ -75,6 +85,15 @@ body {
   }
 
 }
+
+
+.form-control[type="file"]::file-selector-button {
+  background-image: var(--bs-gradient);
+  background-color: rgba(var(--bs-info-rgb), .8) !important;
+  color: white;
+  font-weight: bold;
+}
+
 
 @include media-breakpoint-down(md) {
   :root {

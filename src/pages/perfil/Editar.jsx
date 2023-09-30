@@ -1,24 +1,21 @@
 import { Link } from "react-router-dom";
 import ButtonLoader from "../../components/ButtonLoader";
 import InputIcon from "../../components/InputIcon";
-import SelectIcon from "../../components/SelectIcon";
 import AlertErrors from "../../components/AlertErrors";
 import Icon from "@mdi/react";
 import {
   mdiAccount,
   mdiAccountGroup,
-  mdiCheck,
-  mdiClose,
   mdiContentSaveEdit,
   mdiEmail,
   mdiImage,
   mdiLock,
   mdiText,
 } from "@mdi/js";
-import useUsuarioEditar from "../../hooks/usuario/useUsuarioEditar";
+import usePerfilEditar from "../../hooks/perfil/usePerfilEditar";
 import SpinnerLoader from "../../components/SpinnerLoader";
 
-const UsuarioEditar = () => {
+const Perfilditar = () => {
   const {
     usuario,
     errorsUsuario,
@@ -26,7 +23,7 @@ const UsuarioEditar = () => {
     isLoadingInitialdata,
     handleSubmitUsuario,
     handleChangeInputFormUsuario,
-  } = useUsuarioEditar();
+  } = usePerfilEditar();
   return (
     <div className="container-fluid">
       <div className="row">
@@ -35,11 +32,8 @@ const UsuarioEditar = () => {
             <li className="breadcrumb-item">
               <Link to={"../inicio"}>Inicio</Link>
             </li>
-            <li className="breadcrumb-item">
-              <Link to={"../usuarios"}>Usuarios</Link>
-            </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Editar
+              Editar Perfil
             </li>
           </ol>
         </div>
@@ -49,7 +43,7 @@ const UsuarioEditar = () => {
           <div className="card border-0 shadow-lg ">
             <div className="card-header bg-primary bg-gradient bg-opacity-75 text-white">
               <p className="my-0 text-center fw-bold fs-5">
-                <Icon path={mdiAccountGroup} size={1} /> MODIFICAR USUARIO
+                <Icon path={mdiAccountGroup} size={1} /> MODIFICAR MI PERFIL
               </p>
             </div>
             <div className="card-body">
@@ -63,12 +57,6 @@ const UsuarioEditar = () => {
                 onSubmit={handleSubmitUsuario}
               >
                 <div className="col-md-12 d-flex mb-3">
-                  <Link
-                    to={"../usuarios"}
-                    className="btn btn-outline-danger d-flex align-items-center"
-                  >
-                    <Icon path={mdiClose} size={1} /> CANCELAR
-                  </Link>
                   <ButtonLoader
                     className="btn bg-primary bg-gradient text-white ms-auto"
                     label="MODIFICAR"
@@ -137,7 +125,7 @@ const UsuarioEditar = () => {
                     maxLength="100"
                   />
                 </div>
-                <div className="col-md-6 mb-2">
+                <div className="col-md-6 mb-2 ">
                   <InputIcon
                     name="correo"
                     onChange={handleChangeInputFormUsuario}
@@ -150,24 +138,8 @@ const UsuarioEditar = () => {
                     maxLength="255"
                   />
                 </div>
-                <div className="col-md-6 mb-2">
-                  <SelectIcon
-                    name="estado"
-                    onChange={handleChangeInputFormUsuario}
-                    value={usuario.estado}
-                    label="Estado (*)"
-                    icon={<Icon path={mdiCheck} size={1} />}
-                    size="sm"
-                    options={
-                      <>
-                        <option value="">[--Seleccione--]</option>
-                        <option value={true}>Habilitado</option>
-                        <option value={false}>Inabilitado</option>
-                      </>
-                    }
-                  />
-                </div>
-                <div className="col-md-6 mb-2">
+                <div className="col-md-6 mb-2"></div>
+                <div className="col-md-6 mb-2 ">
                   <InputIcon
                     name="foto"
                     onChange={handleChangeInputFormUsuario}
@@ -194,4 +166,4 @@ const UsuarioEditar = () => {
   );
 };
 
-export default UsuarioEditar;
+export default Perfilditar;

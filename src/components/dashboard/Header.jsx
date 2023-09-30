@@ -3,6 +3,7 @@ import { mdiMenu, mdiAccountEdit, mdiCogs, mdiLogout } from "@mdi/js";
 import useAuthStore from "../../store/authStore";
 import useLogout from "../../hooks/auth/useLogout";
 import useSidebar from "../../hooks/useSidebar";
+import { Link } from "react-router-dom";
 
 const DashboardHeader = () => {
   const user = useAuthStore((state) => state.user);
@@ -19,11 +20,11 @@ const DashboardHeader = () => {
       >
         <Icon path={mdiMenu} size={1.2} />
       </a>
-      <p className="my-0 mx-auto fw-medium align-self-center">
+      <p className="my-0 mx-auto fw-medium align-self-center fs-6 d-none d-md-block">
         SISTEMA DE REDES NEURONALES PARA EL PROCESO DE VENTAS
       </p>
       <div className="ms-auto">
-        <div className="dropdown">
+        <div className="dropdown me-2">
           <a
             href="#"
             className="dropdown-toggle link-light"
@@ -31,7 +32,7 @@ const DashboardHeader = () => {
             aria-expanded="false"
           >
             <img
-              src="/foto_user.jpg"
+              src={user.foto_url}
               alt=""
               className="rounded-circle"
               style={{ width: "30px", height: "30px" }}
@@ -39,15 +40,15 @@ const DashboardHeader = () => {
           </a>
           <ul className="dropdown-menu text-small shadow">
             <li>
-              <a className="dropdown-item" href="#">
+              <Link to={"/panel/mi-perfil"} className="dropdown-item" href="#">
                 <Icon path={mdiAccountEdit} size={1} /> Mi Perfil
-              </a>
+              </Link>
             </li>
-            <li>
+            {/* <li>
               <a className="dropdown-item" href="#">
                 <Icon path={mdiCogs} size={1} /> Configuraciones
               </a>
-            </li>
+            </li> */}
             <li>
               <hr className="dropdown-divider" />
             </li>

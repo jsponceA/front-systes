@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import ReactPaginateBootstrap5 from "../../components/ReactPaginateBootstrap5";
-import useUsuarioIndex from "../../hooks/usuario/useUsuarioIndex";
+import useVentaIndex from "../../hooks/venta/useVentaIndex";
 import Icon from "@mdi/react";
 import {
   mdiAccountGroup,
@@ -13,25 +13,25 @@ import {
   mdiPencil,
   mdiDelete,
   mdiViewList,
+  mdiStore,
 } from "@mdi/js";
 import InputIcon from "../../components/InputIcon";
 import SelectIcon from "../../components/SelectIcon";
-import UsuarioEliminar from "./Eliminar";
 
-const UsuarioIndex = () => {
+const VentaIndex = () => {
   const {
-    listadoUsuarios,
-    usuarios,
-    handleChangeFiltrosUsuario,
+    listadoVentas,
+    ventas,
+    handleChangeFiltrosVenta,
     infoPaginacionListado,
-    isLoadingUsuarios,
-    modalEliminarUsuario,
-    setModalEliminarUsuario,
-    idUsuarioProp,
+    isLoadingVentas,
+    modalEliminarVenta,
+    setModalEliminarVenta,
+    idVentaProp,
     handleKeyInputFiltros,
     handlePageClick,
     openModalEliminar,
-  } = useUsuarioIndex();
+  } = useVentaIndex();
 
   return (
     <div className="container-fluid">
@@ -42,7 +42,7 @@ const UsuarioIndex = () => {
               <Link to={"/panel/inicio"}>Inicio</Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Usuarios
+              Ventas
             </li>
           </ol>
         </div>
@@ -52,7 +52,7 @@ const UsuarioIndex = () => {
           <div className="card border-0 shadow-lg ">
             <div className="card-header bg-primary bg-gradient bg-opacity-75 text-white">
               <p className="my-0 text-center fw-bold fs-5">
-                <Icon path={mdiAccountGroup} size={1} /> USUARIOS
+                <Icon path={mdiStore} size={1} /> VENTAS
               </p>
             </div>
             <div className="card-body">
@@ -72,17 +72,17 @@ const UsuarioIndex = () => {
                       <Icon path={mdiFileExcel} size={1} />
                     </button>
                   </div> */}
-                  <Link
-                    to={"../usuarios/crear"}
+                  {/* <Link
+                    to={"../ventas/crear"}
                     className="btn bg-primary bg-gradient text-white d-flex align-items-center ms-auto"
                   >
                     <Icon path={mdiPlus} size={1} /> AGREGAR USUARIO
-                  </Link>
+                  </Link> */}
                 </div>
                 <div className="col-md-12">
                   <InputIcon
                     name="buscar"
-                    onChange={handleChangeFiltrosUsuario}
+                    onChange={handleChangeFiltrosVenta}
                     onKeyDown={handleKeyInputFiltros}
                     icon={<Icon path={mdiTextSearch} size={1} />}
                     size="sm"
@@ -95,7 +95,7 @@ const UsuarioIndex = () => {
                 <div className="col-md-2 mb-1 ">
                   <SelectIcon
                     name="cantidadRegistros"
-                    onChange={handleChangeFiltrosUsuario}
+                    onChange={handleChangeFiltrosVenta}
                     icon={<Icon path={mdiViewList} size={1} />}
                     size="sm"
                     options={
@@ -114,22 +114,33 @@ const UsuarioIndex = () => {
                     <table className="table table-sm table-hover table-bordered custom-table ">
                       <thead>
                         <tr className="text-nowrap">
-                          <td className="text-center">ACCIONES</td>
-                          <td>
-                            <p className="my-0 mx-4">FOTO</p>
-                          </td>
-                          <td>USUARIO</td>
-                          <td>APELLIDOS Y NOMBRES</td>
-                          <td>CORREO</td>
+                          {/* <td className="text-center">ACCIONES</td> */}
+                          <td>FECHA DE VENTA</td>
+                          <td>DOCUMENTO</td>
+                          <td>VENDEDOR</td>
+                          <td>NRO. DOCUMENTO</td>
+                          <td>CLIENTE</td>
+                          <td>CANTIDAD</td>
+                          <td>U. MEDIDA</td>
+                          <td>CODIGO PRODUCTO</td>
+                          <td>PRODUCTO</td>
+                          <td>MONEDA</td>
+                          <td>PRECIO PUBLICO</td>
+                          <td>PRECIO</td>
+                          <td>TOTALES</td>
+                          <td>DESCUENTO</td>
+                          <td>POR ENTREGAR</td>
+                          <td>UM. POR ENTREGAR</td>
                           <td>ESTADO</td>
-                          <td>FECHA CREACIÓN</td>
-                          <td>FECHA MODIFICACIÓN</td>
+                          <td>CONDICIÓN DE PAGO</td>
+                          <td>LINEA PADRE</td>
+                          <td>LINEA HIJO</td>
                         </tr>
                       </thead>
                       <tbody>
-                        {usuarios.map((usuario) => (
-                          <tr key={usuario.id}>
-                            <td>
+                        {ventas.map((venta) => (
+                          <tr key={venta.id}>
+                            {/* <td>
                               <div className="dropdown open ">
                                 <button
                                   className="btn bg-secondary bg-gradient text-white btn-sm dropdown-toggle "
@@ -143,14 +154,14 @@ const UsuarioIndex = () => {
                                 </button>
                                 <div className="dropdown-menu">
                                   <Link
-                                    to={`../usuarios/editar/${usuario.id}`}
+                                    to={`../ventas/editar/${venta.id}`}
                                     className="dropdown-item"
                                   >
                                     <Icon path={mdiPencil} size={0.8} /> Editar
                                   </Link>
                                   <button
                                     onClick={() =>
-                                      openModalEliminar(usuario.id)
+                                      openModalEliminar(venta.id)
                                     }
                                     type="button"
                                     className="dropdown-item"
@@ -160,52 +171,57 @@ const UsuarioIndex = () => {
                                   </button>
                                 </div>
                               </div>
-                            </td>
+                            </td> */}
+
                             <td>
-                              {usuario.foto_url && (
-                                <img
-                                  src={usuario.foto_url}
-                                  alt=""
-                                  className="img-thumbnail"
-                                  style={{ width: "120px", height: "80px" }}
-                                />
-                              )}
+                              {venta.fecha &&
+                                dayjs(venta.fecha).format("DD/MM/YYYY")}
                             </td>
-                            <td>{usuario.usuario}</td>
-                            <td className="text-capitalize">{`${usuario.apellidos}, ${usuario.nombres}`}</td>
-                            <td>{usuario.correo}</td>
-                            <td>
-                              <span
-                                className={`badge bg-${
-                                  usuario.estado ? "success" : "danger"
-                                }`}
-                              >
-                                {usuario.estado ? "Habilitado" : "Inhabilitado"}
-                              </span>
-                            </td>
-                            <td>
-                              {usuario.created_at &&
-                                dayjs(usuario.created_at).format("DD/MM/YYYY")}
-                            </td>
-                            <td>
-                              {usuario.updated_at &&
-                                dayjs(usuario.updated_at).format("DD/MM/YYYY")}
-                            </td>
+                            <td>{venta.documento}</td>
+                            <td>{venta.vendedor}</td>
+                            <td>{venta.nro_doc}</td>
+                            <td>{venta.cliente}</td>
+                            <td>{venta.cantidad}</td>
+                            <td>{venta.u_medida}</td>
+                            <td>{venta.codigo_producto}</td>
+                            <td>{venta.producto}</td>
+                            <td>{venta.moneda}</td>
+                            <td>{venta.precio_publico}</td>
+                            <td>{venta.precio}</td>
+                            <td>{venta.totales}</td>
+                            <td>{venta.descuento}</td>
+                            <td>{venta.por_entregar}</td>
+                            <td>{venta.um_por_entregar}</td>
+                            <td>{venta.estado}</td>
+                            <td>{venta.condicion_pago}</td>
+                            <td>{venta.linea_padre}</td>
+                            <td>{venta.linea_hijo}</td>
                           </tr>
                         ))}
                       </tbody>
                       <tfoot>
                         <tr className="text-nowrap">
-                          <td className="text-center">ACCIONES</td>
-                          <td>
-                            <p className="my-0 mx-4">FOTO</p>
-                          </td>
-                          <td>USUARIO</td>
-                          <td>APELLIDOS Y NOMBRES</td>
-                          <td>CORREO</td>
+                          {/*  <td className="text-center">ACCIONES</td> */}
+                          <td>FECHA DE VENTA</td>
+                          <td>DOCUMENTO</td>
+                          <td>VENDEDOR</td>
+                          <td>NRO. DOCUMENTO</td>
+                          <td>CLIENTE</td>
+                          <td>CANTIDAD</td>
+                          <td>U. MEDIDA</td>
+                          <td>CODIGO PRODUCTO</td>
+                          <td>PRODUCTO</td>
+                          <td>MONEDA</td>
+                          <td>PRECIO PUBLICO</td>
+                          <td>PRECIO</td>
+                          <td>TOTALES</td>
+                          <td>DESCUENTO</td>
+                          <td>POR ENTREGAR</td>
+                          <td>UM. POR ENTREGAR</td>
                           <td>ESTADO</td>
-                          <td>FECHA CREACIÓN</td>
-                          <td>FECHA MODIFICACIÓN</td>
+                          <td>CONDICIÓN DE PAGO</td>
+                          <td>LINEA PADRE</td>
+                          <td>LINEA HIJO</td>
                         </tr>
                       </tfoot>
                     </table>
@@ -233,14 +249,8 @@ const UsuarioIndex = () => {
           </div>
         </div>
       </div>
-      <UsuarioEliminar
-        openModal={modalEliminarUsuario}
-        setOpenModal={setModalEliminarUsuario}
-        id={idUsuarioProp}
-        listadoUsuarios={listadoUsuarios}
-      />
     </div>
   );
 };
 
-export default UsuarioIndex;
+export default VentaIndex;

@@ -1,34 +1,34 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { todosLosUsuariosService } from "../../services/usuario";
+import { todosLosVentasService } from "../../services/venta";
 import { useEffect } from "react";
-const useUsuarioIndex = () => {
-  const [usuarios, setUsuarios] = useState([]);
+const useVentaIndex = () => {
+  const [ventas, setVentas] = useState([]);
   const [infoPaginacionListado, setInfoPaginacionListado] = useState({});
   const [filtrosListado, setFiltrosListado] = useState({
     buscar: "",
-    cantidadRegistros: 10,
+    cantidadRegistros: 5,
     pagina: 1,
   });
-  const [isLoadingUsuarios, setIsLoadingUsuarios] = useState(false);
-  const [modalEliminarUsuario, setModalEliminarUsuario] = useState(false);
-  const [idUsuarioProp, setIdUsuarioProp] = useState(null);
+  const [isLoadingVentas, setIsLoadingVentas] = useState(false);
+  const [modalEliminarVenta, setModalEliminarVenta] = useState(false);
+  const [idVentaProp, setIdVentaProp] = useState(null);
 
-  const listadoUsuarios = async () => {
+  const listadoVentas = async () => {
     try {
-      setIsLoadingUsuarios(true);
-      const response = await todosLosUsuariosService(filtrosListado);
-      setUsuarios(response.data.usuarios.data);
-      setInfoPaginacionListado(response.data.usuarios);
+      setIsLoadingVentas(true);
+      const response = await todosLosVentasService(filtrosListado);
+      setVentas(response.data.ventas.data);
+      setInfoPaginacionListado(response.data.ventas);
     } catch (error) {
       console.log(error);
       toast.error("Error al obtener el listado de recursos");
     } finally {
-      setIsLoadingUsuarios(false);
+      setIsLoadingVentas(false);
     }
   };
 
-  const handleChangeFiltrosUsuario = async (e) => {
+  const handleChangeFiltrosVenta = async (e) => {
     const { type, name, value } = e.target;
     setFiltrosListado((prev) => ({
       ...prev,
@@ -37,13 +37,13 @@ const useUsuarioIndex = () => {
   };
 
   const openModalEliminar = (id) => {
-    setModalEliminarUsuario(true);
-    setIdUsuarioProp(id);
+    setModalEliminarVenta(true);
+    setIdVentaProp(id);
   };
 
   const handleKeyInputFiltros = async (e) => {
     if (e.key === "Enter") {
-      await listadoUsuarios();
+      await listadoVentas();
     }
   };
 
@@ -53,22 +53,22 @@ const useUsuarioIndex = () => {
   };
 
   useEffect(() => {
-    listadoUsuarios();
+    listadoVentas();
   }, [filtrosListado.pagina, filtrosListado.cantidadRegistros]);
 
   return {
-    listadoUsuarios,
-    usuarios,
-    handleChangeFiltrosUsuario,
+    listadoVentas,
+    ventas,
+    handleChangeFiltrosVenta,
     infoPaginacionListado,
-    isLoadingUsuarios,
-    modalEliminarUsuario,
-    setModalEliminarUsuario,
-    idUsuarioProp,
+    isLoadingVentas,
+    modalEliminarVenta,
+    setModalEliminarVenta,
+    idVentaProp,
     handleKeyInputFiltros,
     handlePageClick,
     openModalEliminar,
   };
 };
 
-export default useUsuarioIndex;
+export default useVentaIndex;
