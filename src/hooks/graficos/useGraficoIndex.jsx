@@ -24,9 +24,6 @@ const useGraficoIndex = () => {
       setIsLoadingGraficos(true);
       const response = await todosLosGraficosService(filtrosListado);
       // setProductosMasVendidos(response.data.barDataResult);
-      console.log(
-        response.data.barDataResult.data.map((item) => item?.producto || "-")
-      );
       setBarData({
         labels: response.data.barDataResult.labels,
         datasets: response.data.barDataResult.data.map((item) => {
