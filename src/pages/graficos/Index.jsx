@@ -5,124 +5,29 @@ import useGraficoIndex from "../../hooks/graficos/useGraficoIndex";
 
 ChartJS.register(...registerables);
 
-const labels = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Setiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
-];
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "Cantidad de productos vendidos",
-      data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
-      backgroundColor: [
-        "rgb(240, 163, 10)",
-        "rgb(135, 206, 235)",
-        "rgb(154, 205, 50)",
-        "rgb(255, 105, 180)",
-        "rgb(72, 61, 139)",
-        "rgb(50, 205, 50)",
-        "rgb(255, 69, 0)",
-        "rgb(173, 216, 230)",
-        "rgb(255, 140, 0)",
-        "rgb(218, 112, 214)",
-        "rgb(255, 99, 71)",
-        "rgb(60, 179, 113)",
-      ],
-      borderColor: [
-        "rgb(240, 163, 10)",
-        "rgb(135, 206, 235)",
-        "rgb(154, 205, 50)",
-        "rgb(255, 105, 180)",
-        "rgb(72, 61, 139)",
-        "rgb(50, 205, 50)",
-        "rgb(255, 69, 0)",
-        "rgb(173, 216, 230)",
-        "rgb(255, 140, 0)",
-        "rgb(218, 112, 214)",
-        "rgb(255, 99, 71)",
-        "rgb(60, 179, 113)",
-      ],
-    },
-  ],
-};
-
-const pieData = {
-  labels,
-  datasets: [
-    {
-      label: "Meta planeada",
-      data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
-      backgroundColor: [
-        "rgb(240, 163, 10)",
-        "rgb(135, 206, 235)",
-        "rgb(154, 205, 50)",
-        "rgb(255, 105, 180)",
-        "rgb(72, 61, 139)",
-        "rgb(50, 205, 50)",
-        "rgb(255, 69, 0)",
-        "rgb(173, 216, 230)",
-        "rgb(255, 140, 0)",
-        "rgb(218, 112, 214)",
-        "rgb(255, 99, 71)",
-        "rgb(60, 179, 113)",
-      ],
-      borderColor: [
-        "rgb(240, 163, 10)",
-        "rgb(135, 206, 235)",
-        "rgb(154, 205, 50)",
-        "rgb(255, 105, 180)",
-        "rgb(72, 61, 139)",
-        "rgb(50, 205, 50)",
-        "rgb(255, 69, 0)",
-        "rgb(173, 216, 230)",
-        "rgb(255, 140, 0)",
-        "rgb(218, 112, 214)",
-        "rgb(255, 99, 71)",
-        "rgb(60, 179, 113)",
-      ],
-    },
-  ],
-};
-
 const GraficosIndex = () => {
   const {
-    listadoGraficos,
-    productosMasVendidos,
-    handleChangeFiltrosGrafico,
-    isLoadingGraficos,
-    modalEliminarGrafico,
-    setModalEliminarGrafico,
-    idGraficoProp,
-    handleKeyInputFiltros,
-    handlePageClick,
-    openModalEliminar,
-    barData,
+    grafico1,
+    grafico2,
+    grafico3,
+    grafico4,
+    grafico5,
+    tabla1,
+    formatNumbers,
   } = useGraficoIndex();
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-12">
           <Bar
-            data={data}
+            data={grafico1}
             options={{
               responsive: true,
               maintainAspectRatio: true,
               plugins: {
                 title: {
                   display: true,
-                  text: "PRODUCTOS MAS VENDIDOS EN LOS ULTIMOS 12 MESES - 2022",
+                  text: "CANTIDAD DE PRODUCTOS VENDIDOS EN EL AÑO - 2022",
                 },
               },
             }}
@@ -133,14 +38,14 @@ const GraficosIndex = () => {
         </div>
         <div className="col-md-12">
           <Bar
-            data={data}
+            data={grafico2}
             options={{
               responsive: true,
               maintainAspectRatio: true,
               plugins: {
                 title: {
                   display: true,
-                  text: "PRODUCTOS MAS VENDIDOS EN LOS ULTIMOS 12 MESES - 2023",
+                  text: "CANTIDAD DE PRODUCTOS VENDIDOS EN EL AÑO - 2023",
                 },
               },
             }}
@@ -161,7 +66,7 @@ const GraficosIndex = () => {
                     VENTAS DEL AÑO ACTUAL ( 2023 )
                   </td>
                   <td rowSpan={2} className="text-center ">
-                    (%) PORCENTAJE DE CRECIMIENTO DE VENTAS{" "}
+                    (%) PORCENTAJE DE CRECIMIENTO DE VENTAS ANUAL{" "}
                   </td>
                 </tr>
                 <tr className="text-nowrap">
@@ -173,12 +78,14 @@ const GraficosIndex = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>123456</td>
-                  <td>S/ 484848</td>
-                  <td>123456</td>
-                  <td>S/ 484848</td>
+                  <td>{formatNumbers(tabla1.cantidad2022)} Unidades</td>
+                  <td>S/ {formatNumbers(tabla1.monto2022)}</td>
+                  <td>{formatNumbers(tabla1.cantidad2023)} Unidades</td>
+                  <td>S/ {formatNumbers(tabla1.monto2023)}</td>
                   <td className="text-center">
-                    <p className="fs-2 my-auto">45%</p>
+                    <p className="fs-2 my-auto">
+                      {tabla1.porcentajeCrecimientoVentas}%
+                    </p>
                   </td>
                 </tr>
               </tbody>
@@ -190,14 +97,14 @@ const GraficosIndex = () => {
         </div>
         <div className="col-md-6">
           <Pie
-            data={pieData}
+            data={grafico3}
             options={{
               responsive: true,
               maintainAspectRatio: true,
               plugins: {
                 title: {
                   display: true,
-                  text: "META PLANEADA PARA CADA MES - 2023",
+                  text: "PORCENTAJE DE VENTAS PLANEADAS PARA CADA MES - 2023",
                 },
               },
             }}
@@ -205,7 +112,7 @@ const GraficosIndex = () => {
         </div>
         <div className="col-md-6">
           <Bar
-            data={data}
+            data={grafico4}
             options={{
               responsive: true,
               maintainAspectRatio: true,
@@ -222,7 +129,7 @@ const GraficosIndex = () => {
                 },
                 title: {
                   display: true,
-                  text: "PRODUCTOS MAS VENDIDOS",
+                  text: "PRODUCTOS MAS VENDIDOS EN LOS ULTIMOS 12 MESES",
                 },
               },
             }}
@@ -246,7 +153,38 @@ const GraficosIndex = () => {
                     <p className="fs-2 my-auto">37%</p>
                   </td>
                   <td className="text-center">
-                    <p className="fs-2 my-auto">72%</p>
+                    <p className="fs-2 my-auto">52%</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="col-md-12 my-3">
+          <hr />
+        </div>
+        <div className="col-md-12 my-3">
+          <div className="table-responsive">
+            <table className="table table-sm table-hover table-bordered custom-table ">
+              <thead>
+                <tr className="text-nowrap">
+                  <td className="text-center ">
+                    SE RECOMIENDA COMPRAR EL SIGUIENTE PRODUCTO PARA LOS
+                    PROXIMOS MESES{" "}
+                  </td>
+                  <td>
+                    PORCENTAJE DE CRECIMIENTO DE VENTAS DE ESTE PRODUCTO PARA EL
+                    PROXIMO MES
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="text-center">
+                    <p className="fs-2 my-auto">{grafico5.producto}</p>
+                  </td>
+                  <td className="text-center">
+                    <p className="fs-2 my-auto">10%</p>
                   </td>
                 </tr>
               </tbody>
