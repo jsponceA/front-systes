@@ -127,6 +127,7 @@ const UsuarioEditar = () => {
                     icon={<Icon path={mdiLock} size={1} />}
                     size="sm"
                     placeholder="********"
+                    type="password"
                     maxLength="255"
                   />
                 </div>

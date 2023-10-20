@@ -118,6 +118,7 @@ const UsuarioCrear = () => {
                     size="sm"
                     placeholder="********"
                     required
+                    type="password"
                     maxLength="255"
                   />
                 </div>
