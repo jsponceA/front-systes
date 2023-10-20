@@ -58,34 +58,38 @@ const DashboardSidebar = () => {
             Inicio
           </NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink
-            to={"/panel/usuarios"}
-            className="nav-link d-flex align-items-center"
-          >
-            <Icon
-              path={mdiAccountGroup}
-              size={0.8}
-              className="me-1"
-              color="silver"
-            />{" "}
-            Usuarios
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to={"/panel/carga-excel"}
-            className="nav-link d-flex align-items-center"
-          >
-            <Icon
-              path={mdiFileExcel}
-              size={0.8}
-              color="green"
-              className="me-1"
-            />{" "}
-            Cargar Excel Ventas
-          </NavLink>
-        </li>
+        {user?.rol?.nombre === "administrador" && (
+          <li className="nav-item">
+            <NavLink
+              to={"/panel/usuarios"}
+              className="nav-link d-flex align-items-center"
+            >
+              <Icon
+                path={mdiAccountGroup}
+                size={0.8}
+                className="me-1"
+                color="silver"
+              />{" "}
+              Usuarios
+            </NavLink>
+          </li>
+        )}
+        {user?.rol?.nombre === "administrador" && (
+          <li className="nav-item">
+            <NavLink
+              to={"/panel/carga-excel"}
+              className="nav-link d-flex align-items-center"
+            >
+              <Icon
+                path={mdiFileExcel}
+                size={0.8}
+                color="green"
+                className="me-1"
+              />{" "}
+              Cargar Excel Ventas
+            </NavLink>
+          </li>
+        )}
         <li className="nav-item">
           <NavLink
             to={"/panel/graficos"}

@@ -119,6 +119,7 @@ const UsuarioIndex = () => {
                             <p className="my-0 mx-4">FOTO</p>
                           </td>
                           <td>USUARIO</td>
+                          <td>ROL</td>
                           <td>APELLIDOS Y NOMBRES</td>
                           <td>CORREO</td>
                           <td>ESTADO</td>
@@ -172,6 +173,9 @@ const UsuarioIndex = () => {
                               )}
                             </td>
                             <td>{usuario.usuario}</td>
+                            <td className="text-capitalize">
+                              {usuario?.rol?.nombre}
+                            </td>
                             <td className="text-capitalize">{`${usuario.apellidos}, ${usuario.nombres}`}</td>
                             <td>{usuario.correo}</td>
                             <td>
@@ -201,6 +205,7 @@ const UsuarioIndex = () => {
                             <p className="my-0 mx-4">FOTO</p>
                           </td>
                           <td>USUARIO</td>
+                          <td>ROL</td>
                           <td>APELLIDOS Y NOMBRES</td>
                           <td>CORREO</td>
                           <td>ESTADO</td>

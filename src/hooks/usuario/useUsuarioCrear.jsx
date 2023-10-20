@@ -13,6 +13,7 @@ const useUsuarioCrear = () => {
     correo: "",
     foto: "",
     estado: true,
+    rol_id: "",
   });
   const [errorsUsuario, setErrorsUsuario] = useState([]);
   const [isLoadingUsuario, setIsLoadingUsuario] = useState(false);

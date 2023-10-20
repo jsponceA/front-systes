@@ -13,6 +13,7 @@ import {
   mdiEmail,
   mdiImage,
   mdiLock,
+  mdiShieldAccount,
   mdiText,
 } from "@mdi/js";
 import useUsuarioEditar from "../../hooks/usuario/useUsuarioEditar";
@@ -84,6 +85,24 @@ const UsuarioEditar = () => {
                     title="Errores de validación"
                     show={errorsUsuario.length > 0}
                     errors={errorsUsuario}
+                  />
+                </div>
+                <div className="col-md-12 mb-2">
+                  <SelectIcon
+                    label="Rol (*)"
+                    name="rol_id"
+                    onChange={handleChangeInputFormUsuario}
+                    icon={<Icon path={mdiShieldAccount} size={1} />}
+                    size="sm"
+                    required
+                    value={usuario.rol_id}
+                    options={
+                      <>
+                        <option value="">[--Seleccione]</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Generico</option>
+                      </>
+                    }
                   />
                 </div>
                 <div className="col-md-6 mb-2">

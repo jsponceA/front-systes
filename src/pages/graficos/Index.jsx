@@ -179,14 +179,16 @@ const GraficosIndex = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="text-center">
-                    <p className="fs-2 my-auto">{grafico5.producto}</p>
-                  </td>
-                  <td className="text-center">
-                    <p className="fs-2 my-auto">10%</p>
-                  </td>
-                </tr>
+                {grafico5.map((item, index) => (
+                  <tr key={item.producto}>
+                    <td className="text-center">
+                      <p className="fs-2 my-auto">{item.producto}</p>
+                    </td>
+                    <td className="text-center">
+                      <p className="fs-2 my-auto">{4 + (index + 1)}%</p>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

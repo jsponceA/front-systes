@@ -29,10 +29,7 @@ const useGraficoIndex = () => {
     datasets: [],
   });
 
-  const [grafico5, setGrafico5] = useState({
-    labels: [],
-    datasets: [],
-  });
+  const [grafico5, setGrafico5] = useState([]);
 
   const [tabla1, setTabla1] = useState({
     cantidad2022: 0,
@@ -131,9 +128,7 @@ const useGraficoIndex = () => {
         ],
       });
 
-      setGrafico5({
-        producto: res5.producto,
-      });
+      setGrafico5(res5);
     } catch (error) {
       console.log(error);
       toast.error("Error al obtener el listado de recursos");

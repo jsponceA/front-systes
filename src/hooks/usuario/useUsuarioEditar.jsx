@@ -19,6 +19,7 @@ const useUsuarioEditar = () => {
     foto: "",
     foto_url: "",
     estado: true,
+    rol_id: "",
   });
   const [errorsUsuario, setErrorsUsuario] = useState([]);
   const [isLoadingUsuario, setIsLoadingUsuario] = useState(false);
