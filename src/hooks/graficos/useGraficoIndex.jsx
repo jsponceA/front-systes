@@ -8,6 +8,59 @@ import {
   totalesVentasPorMesAnioPasadoService,
 } from "../../services/grafico";
 import { useEffect } from "react";
+import { faker } from "@faker-js/faker";
+
+const mesesAnio = [
+  {
+    name: "Enero",
+    value: "01",
+  },
+  {
+    name: "Febrero",
+    value: "02",
+  },
+  {
+    name: "Marzo",
+    value: "03",
+  },
+  {
+    name: "Abril",
+    value: "04",
+  },
+  {
+    name: "Mayo",
+    value: "05",
+  },
+  {
+    name: "Junio",
+    value: "06",
+  },
+  {
+    name: "Julio",
+    value: "07",
+  },
+  {
+    name: "Agosto",
+    value: "08",
+  },
+  {
+    name: "Setiembre",
+    value: "09",
+  },
+  {
+    name: "Octubre",
+    value: "10",
+  },
+  {
+    name: "Noviembre",
+    value: "11",
+  },
+  {
+    name: "Diciembre",
+    value: "12",
+  },
+];
+
 const useGraficoIndex = () => {
   const [grafico1, setGrafico1] = useState({
     labels: [],
@@ -38,6 +91,12 @@ const useGraficoIndex = () => {
     monto2023: 0,
     porcentajeCrecimientoVentas: 0,
   });
+
+  const [selectMes, setSelectMes] = useState("11");
+  const [porcentajeNivelEficacia, setPorcentajeNivelEficacia] = useState(21);
+  const [porcentajeNivelProductividad, setPorcentajeNivelProductividad] =
+    useState(32);
+  const [porcentajesProductos, setPorcentajesProductos] = useState(1);
 
   const initialData = async () => {
     try {
@@ -151,6 +210,16 @@ const useGraficoIndex = () => {
     return formatter.format(amount);
   };
 
+  const randomsValuesNumbers = () => {
+    setPorcentajeNivelEficacia(faker.number.int({ min: 12, max: 60 }));
+    setPorcentajeNivelProductividad(faker.number.int({ min: 27, max: 50 }));
+    setPorcentajesProductos(faker.number.int({ min: 1, max: 20 }));
+  };
+
+  useEffect(() => {
+    randomsValuesNumbers();
+  }, [selectMes]);
+
   useEffect(() => {
     initialData();
   }, []);
@@ -163,6 +232,12 @@ const useGraficoIndex = () => {
     grafico5,
     tabla1,
     formatNumbers,
+    mesesAnio,
+    selectMes,
+    setSelectMes,
+    porcentajeNivelEficacia,
+    porcentajeNivelProductividad,
+    porcentajesProductos,
   };
 };
 

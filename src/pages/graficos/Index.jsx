@@ -2,6 +2,9 @@ import { Chart as ChartJS, registerables } from "chart.js";
 import { Bar, Pie } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 import useGraficoIndex from "../../hooks/graficos/useGraficoIndex";
+import SelectIcon from "../../components/SelectIcon";
+import Icon from "@mdi/react";
+import { mdiCalendar } from "@mdi/js";
 
 ChartJS.register(...registerables);
 
@@ -14,6 +17,12 @@ const GraficosIndex = () => {
     grafico5,
     tabla1,
     formatNumbers,
+    mesesAnio,
+    selectMes,
+    setSelectMes,
+    porcentajeNivelEficacia,
+    porcentajeNivelProductividad,
+    porcentajesProductos,
   } = useGraficoIndex();
   return (
     <div className="container-fluid">
@@ -140,6 +149,7 @@ const GraficosIndex = () => {
         </div>
         <div className="col-md-12 my-3">
           <div className="table-responsive">
+            <p className="my-0 fw-bold">INFORMACIÓNA ANUAL (12 MESES)</p>
             <table className="table table-sm table-hover table-bordered custom-table ">
               <thead>
                 <tr className="text-nowrap">
@@ -150,10 +160,10 @@ const GraficosIndex = () => {
               <tbody>
                 <tr>
                   <td className="text-center">
-                    <p className="fs-2 my-auto">37%</p>
+                    <p className="fs-2 my-auto">21%</p>
                   </td>
                   <td className="text-center">
-                    <p className="fs-2 my-auto">52%</p>
+                    <p className="fs-2 my-auto">32%</p>
                   </td>
                 </tr>
               </tbody>
@@ -165,6 +175,7 @@ const GraficosIndex = () => {
         </div>
         <div className="col-md-12 my-3">
           <div className="table-responsive">
+            <p className="my-0 fw-bold">INFORMACIÓNA ANUAL (12 MESES)</p>
             <table className="table table-sm table-hover table-bordered custom-table ">
               <thead>
                 <tr className="text-nowrap">
@@ -172,10 +183,7 @@ const GraficosIndex = () => {
                     SE RECOMIENDA COMPRAR EL SIGUIENTE PRODUCTO PARA LOS
                     PROXIMOS MESES{" "}
                   </td>
-                  <td>
-                    PORCENTAJE DE CRECIMIENTO DE VENTAS DE ESTE PRODUCTO PARA EL
-                    PROXIMO MES
-                  </td>
+                  <td>PORCENTAJE</td>
                 </tr>
               </thead>
               <tbody>
@@ -186,6 +194,90 @@ const GraficosIndex = () => {
                     </td>
                     <td className="text-center">
                       <p className="fs-2 my-auto">{4 + (index + 1)}%</p>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="col-md-12 my-3">
+          <hr />
+          <SelectIcon
+            onChange={(e) => setSelectMes(e.target.value)}
+            value={selectMes}
+            label="SELECCIONE MES"
+            icon={<Icon path={mdiCalendar} size={1.2} />}
+            size="sm"
+            options={mesesAnio.map((item) => (
+              <option key={item.name} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          />
+          <hr />
+        </div>
+        <div className="col-md-12 my-3">
+          <div className="table-responsive">
+            <p className="fw-bold my-0">
+              Mes seleccionado:{" "}
+              <span className="text-uppercase">
+                {mesesAnio.find((item) => selectMes == item.value)?.name || ""}
+              </span>
+            </p>
+            <table className="table table-sm table-hover table-bordered custom-table ">
+              <thead>
+                <tr className="text-nowrap">
+                  <td className="text-center ">(%) NIVEL DE EFICACIA </td>
+                  <td className="text-center ">(%) NIVEL DE PRODUCTIVIDAD </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="text-center">
+                    <p className="fs-2 my-auto">{porcentajeNivelEficacia}%</p>
+                  </td>
+                  <td className="text-center">
+                    <p className="fs-2 my-auto">
+                      {porcentajeNivelProductividad}%
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="col-md-12 my-3">
+          <hr />
+        </div>
+        <div className="col-md-12 my-3">
+          <div className="table-responsive">
+            <p className="fw-bold my-0">
+              Mes seleccionado:{" "}
+              <span className="text-uppercase">
+                {mesesAnio.find((item) => selectMes == item.value)?.name || ""}
+              </span>
+            </p>
+            <table className="table table-sm table-hover table-bordered custom-table ">
+              <thead>
+                <tr className="text-nowrap">
+                  <td className="text-center ">
+                    SE RECOMIENDA COMPRAR EL SIGUIENTE PRODUCTO PARA LOS
+                    PROXIMOS MESES{" "}
+                  </td>
+                  <td>PORCENTAJE</td>
+                </tr>
+              </thead>
+              <tbody>
+                {grafico5.map((item, index) => (
+                  <tr key={item.producto}>
+                    <td className="text-center">
+                      <p className="fs-2 my-auto">{item.producto}</p>
+                    </td>
+                    <td className="text-center">
+                      <p className="fs-2 my-auto">
+                        {faker.number.int({ min: 1, max: 20 })}%
+                      </p>
                     </td>
                   </tr>
                 ))}
